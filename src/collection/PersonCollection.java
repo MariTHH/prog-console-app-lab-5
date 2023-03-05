@@ -147,8 +147,8 @@ public class PersonCollection {
         for (Person person : treeSet) {
             if (person.getEyeColor().getCode() == code) {
                 count += 1;
-                System.out.println(count);
             }
+            System.out.println(count);
         }
     }
 }
