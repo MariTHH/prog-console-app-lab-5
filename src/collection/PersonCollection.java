@@ -35,3 +35,15 @@ public class PersonCollection {
      public static void addPerson(Person person) {
         treeSet.add(person);
     }
+    
+     public static void personInfo(Person person) {
+        System.out.println("ID: " + person.getId());
+        System.out.println("Имя персонажа: " + person.getName());
+        System.out.println("Координаты: X=" + person.getCoordinates().getX() + ", Y=" + person.getCoordinates().getY());
+        System.out.println("Время создания: " + person.getCreationDate());
+        System.out.println("Рост: " + person.getHeight());
+        System.out.println("Цвет глаз: " + person.getEyeColor());
+        System.out.println("Цвет волос: " + person.getHairColor());
+        System.out.println("Страна: " + person.getNationality());
+        System.out.println("Локация: " + person.getCoordinates().getX() + person.getCoordinates().getY() + person.getName());
+    }
