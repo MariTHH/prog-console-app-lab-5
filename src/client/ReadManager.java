@@ -22,4 +22,38 @@ public class ReadManager {
             }
         }
     }
+    
+    public static Long readCoordinatesX(Scanner sc) {
+        System.out.println("Введите координату X");
+        while (true) {
+            try {
+                String X_string = sc.nextLine().trim();
+                long X = Long.parseLong(X_string);
+                if (!X_string.equals("")) {
+                    return X;
+                } else {
+                    System.out.println("Вы должны ввести число, а не пустую строку");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Вы ввели не число");
+            }
+        }
+    }
+
+    public static Integer readCoordinatesY(Scanner sc) {
+        System.out.println("Введите координату Y");
+        while (true) {
+            try {
+                String Y_string = sc.nextLine().trim();
+                int Y = Integer.parseInt(Y_string);
+                if (Y_string.equals("")) {
+                    return Y;
+                } else {
+                    System.out.println("Вы должны ввести число, а не пустую строку");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Вы ввели не число");
+            }
+        }
+    }
 }
