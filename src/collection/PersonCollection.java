@@ -90,3 +90,12 @@ public class PersonCollection {
         public static void clearCollection() {
         treeSet.clear();
     }
+    
+        public static boolean existID(int ID) {
+        for (Person person : PersonCollection.getCollection()) {
+            if (person.getId() == ID) {
+                return true;
+            }
+        }
+        return false;
+    }
