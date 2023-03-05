@@ -47,3 +47,12 @@ public class PersonCollection {
         System.out.println("Страна: " + person.getNationality());
         System.out.println("Локация: " + person.getCoordinates().getX() + person.getCoordinates().getY() + person.getName());
     }
+    
+        public static void information() {
+        if (treeSet == null) {
+            System.out.println("В коллекции ничего нет");
+        } else
+            for (Person person : treeSet) {
+                PersonCollection.personInfo(person);
+            }
+    }
