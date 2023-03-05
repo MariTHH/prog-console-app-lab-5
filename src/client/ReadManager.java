@@ -73,4 +73,54 @@ public class ReadManager {
             }
         }
     }
+    
+    public static String readLocationName(Scanner sc) {
+        System.out.println("Введите название локации");
+        String location = sc.nextLine().trim();
+        if (location.length() >= 944 || location.equals("")) {
+            while (location.length() >= 944) {
+                System.out.println("Слишком длинное название");
+                location = sc.nextLine().trim();
+            }
+            while (location.equals("")) {
+                System.out.println("Название не может быть пустой строкой");
+                location = sc.nextLine().trim();
+            }
+        }
+        return location;
+    }
+
+    public static Double readLocationX(Scanner sc) {
+        System.out.println("Введите координату X");
+        while (true) {
+            try {
+                String X_s = sc.nextLine().trim();
+                double X = Double.parseDouble(X_s);
+                if (!X_s.equals("")) {
+                    return X;
+                } else {
+                    System.out.println("Значение не должно быть пустым. Попробуйте ещё раз.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Введённое значение не является числом. Попробуйте еще раз.");
+            }
+        }
+    }
+
+    public static Float readLocationY(Scanner sc) {
+        System.out.println("Введите координату Y");
+        while (true) {
+            try {
+                String Y_s = sc.nextLine().trim();
+                float Y = Float.parseFloat(Y_s);
+                if (Y_s.equals("")) {
+                    return Y;
+                } else {
+                    System.out.println("Вы должны ввести число, а не пустую строку");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Вы ввели не число");
+            }
+        }
+    }
 }
