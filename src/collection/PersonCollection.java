@@ -108,3 +108,18 @@ public class PersonCollection {
             }
         }
     }
+
+        public static void updateElement(Person newPerson, int ID) {
+        for (Person person : treeSet) {
+            if (person.getId() == ID) {
+                person.setName(newPerson.getName());
+                person.setCoordinates(newPerson.getCoordinates());
+                person.setCreationDate(newPerson.getCreationDate());
+                person.setHeight(newPerson.getHeight());
+                person.setEyeColor(newPerson.getEyeColor());
+                person.setHairColor(newPerson.getHairColor());
+                person.setNationality(newPerson.getNationality());
+                person.setLocation(newPerson.getLocation());
+            }
+        }
+    }
