@@ -56,4 +56,21 @@ public class ReadManager {
             }
         }
     }
+    
+    public static Integer readHeight(Scanner sc) {
+        System.out.println("Введите рост персонажа");
+        while (true) {
+            String height_string = sc.nextLine().trim();
+            try {
+                int height = Integer.parseInt(height_string);
+                if (height > 0) {
+                    return height;
+                } else {
+                    System.out.println("Рост должен быть больше 0");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Вы ввели не число");
+            }
+        }
+    }
 }
