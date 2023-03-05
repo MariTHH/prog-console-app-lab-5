@@ -56,3 +56,18 @@ public class PersonCollection {
                 PersonCollection.personInfo(person);
             }
     }
+
+        public void addIfMin(Scanner sc) {
+        Person person = ClientManager.getNewPerson(sc);
+        if (treeSet == null) {
+            addPerson(person);
+        } else {
+            for (Person person1 : treeSet) {
+                if (person1.compareTo(person) > 0) {
+                    addPerson(person);
+                } else {
+                    System.out.println("Персонаж не может быть добавлен");
+                }
+            }
+        }
+    }
