@@ -99,3 +99,12 @@ public class PersonCollection {
         }
         return false;
     }
+
+        public static void removePerson(int ID) {
+        for (Person person : treeSet) {
+            if (existID(ID)) {
+                treeSet.remove(person);
+                break;
+            }
+        }
+    }
