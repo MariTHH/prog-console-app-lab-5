@@ -86,3 +86,7 @@ public class PersonCollection {
             }
         }
     }
+    
+        public static void clearCollection() {
+        treeSet.clear();
+    }
