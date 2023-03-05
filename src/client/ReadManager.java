@@ -123,4 +123,26 @@ public class ReadManager {
             }
         }
     }
+    
+    public static boolean doesThisColorTypeExist(String colors) {
+        for (Color ourColor : Color.values()) {
+            if (ourColor.name().equals(colors)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static Color readColor(Scanner sc) {
+        System.out.println("Выберите любой цвет из предложенных" + Arrays.asList(Color.values()));
+        String type = sc.nextLine().trim();
+        if (!doesThisColorTypeExist(type) || type.equals("")) {
+            while (!doesThisColorTypeExist(type)) {
+                System.out.println("Такого цвета нет, выберите один из предложенных");
+                type = sc.nextLine().trim();
+                doesThisColorTypeExist(type);
+            }
+        }
+        return Enum.valueOf(Color.class, type);
+    }
 }
