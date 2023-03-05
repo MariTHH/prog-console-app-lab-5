@@ -141,3 +141,15 @@ public class PersonCollection {
             }
         }
     }
+    
+        public static void countEyeColor(int code) {
+        int count = 1;
+        for (Person person : treeSet) {
+            if (person.getEyeColor().getCode() == code) {
+                count += 1;
+                System.out.println(count);
+            }
+        }
+    }
+}
+
