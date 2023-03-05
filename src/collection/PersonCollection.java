@@ -123,3 +123,21 @@ public class PersonCollection {
             }
         }
     }
+
+        public void removeGreater(Scanner sc) {
+        Person newPerson = ClientManager.getNewPerson(sc);
+        for (Person person : treeSet) {
+            if (person.getHeight() > newPerson.getHeight()) {
+                treeSet.remove(person);
+            }
+        }
+    }
+    
+        public void removeGreater(Scanner sc) {
+        Person newPerson = ClientManager.getNewPerson(sc);
+        for (Person person : treeSet) {
+            if (person.getHeight() > newPerson.getHeight()) {
+                treeSet.remove(person);
+            }
+        }
+    }
