@@ -31,3 +31,7 @@ public class PersonCollection {
         public static TreeSet<Person> getCollection() {
         return treeSet;
     }
+
+     public static void addPerson(Person person) {
+        treeSet.add(person);
+    }
