@@ -145,4 +145,27 @@ public class ReadManager {
         }
         return Enum.valueOf(Color.class, type);
     }
+    
+    public static boolean doesThisCountryTypeExist(String test) {
+        for (Country c : Country.values()) {
+            if (c.name().equals(test)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static Country readCountry(Scanner sc) {
+        System.out.println("Выберите любую страну из предложенных" + Arrays.asList(Country.values()));
+        String type = sc.nextLine().trim();
+        if (!doesThisCountryTypeExist(type) || type.equals("")) {
+            while (!doesThisCountryTypeExist(type)) {
+                System.out.println("Такой страны нет, выберите одну из предложенных");
+                type = sc.nextLine().trim();
+                doesThisCountryTypeExist(type);
+            }
+        }
+        return Enum.valueOf(Country.class, type);
+    }
+    
 }
