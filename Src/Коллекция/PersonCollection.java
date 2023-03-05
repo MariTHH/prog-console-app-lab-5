@@ -16,3 +16,7 @@ public class PersonCollection {
     private static TreeSet<Person> treeSet;
     private static LocalDate creationDate;
 }
+
+    public static void addPerson(Person person) {
+        treeSet.add(person);
+    }
