@@ -21,6 +21,7 @@ public class CommandManager {
         commandMap.put("removeGreater", new RemoveGreater());
         commandMap.put("countGreater", new CountGreaterThanEyeColor());
         commandMap.put("update", new Update());
+        commandMap.put("filter_greater_than_location", new FilterGreaterThanLocation());
     }
 
     public static HashMap<String, Command> getCommandMap() {
