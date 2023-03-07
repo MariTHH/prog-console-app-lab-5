@@ -94,7 +94,7 @@ public class ReadManager {
     }
 
     public static Double readLocationX(Scanner sc) {
-        System.out.println("Введите координату X");
+        System.out.println("Введите координату X для локации ");
         while (true) {
             try {
                 String X_s = sc.nextLine().trim();
@@ -111,7 +111,7 @@ public class ReadManager {
     }
 
     public static Float readLocationY(Scanner sc) {
-        System.out.println("Введите координату Y");
+        System.out.println("Введите координату Y для локации ");
         while (true) {
             try {
                 String Y_s = sc.nextLine().trim();
