@@ -24,6 +24,7 @@ public class CommandManager {
         commandMap.put("filter_greater_than_location", new FilterGreaterThanLocation());
         commandMap.put("print_unique_location", new PrintUniqueLocation());
         commandMap.put("info", new Info());
+        commandMap.put("help", new Help());
     }
 
     public static HashMap<String, Command> getCommandMap() {
