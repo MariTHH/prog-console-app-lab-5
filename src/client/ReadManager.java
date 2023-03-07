@@ -17,6 +17,9 @@ public class ReadManager {
             if (name.equals("")) {
                 System.out.println("Имя не может быть пустой строкой, введите имя");
                 name = sc.nextLine().trim();
+            } else if (!name.matches("^[a-zA-Z]*$")) {
+                System.out.println("Имя не может быть иными знаками кроме букв");
+                name = sc.nextLine().trim();
             } else {
                 return name;
             }
