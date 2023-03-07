@@ -166,6 +166,19 @@ public class PersonCollection {
         System.out.println(uniq);
     }
     
+       public static void filterGreater(String xString) {
+        double x = Double.parseDouble(xString);
+        try {
+            for (Person person : treeSet) {
+                if (person.getLocation().getX() > x) {
+                    System.out.println(person.getName() + " : " + person.getLocation().getX());
+                }
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Вы неправильно ввели данные");
+        }
+    }
+    
     public static void info() {
         System.out.println(treeSet.getClass().getName() + " " + PersonCollection.creationDate + " " + treeSet.size());
     }
