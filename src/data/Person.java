@@ -4,7 +4,7 @@ import collection.GenerationId;
 
 import java.time.LocalDate;
 
-public class Person {
+public class Person implements Comparable<Person> {
     private int id;
     private String name;
     private Coordinates coordinates;
