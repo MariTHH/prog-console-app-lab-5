@@ -23,6 +23,7 @@ public class CommandManager {
         commandMap.put("update", new Update());
         commandMap.put("filter_greater_than_location", new FilterGreaterThanLocation());
         commandMap.put("print_unique_location", new PrintUniqueLocation());
+        commandMap.put("info", new Info());
     }
 
     public static HashMap<String, Command> getCommandMap() {
@@ -46,7 +47,7 @@ public class CommandManager {
                 System.out.println("Вы не ввели команду");
             }
         } catch (IllegalStateException | NullPointerException e) {
-            if (!name[0].equals("")) {
+            if (name[0].equals("")) {
                 System.out.println("Команды " + name[0] + " не существует");
             }
         }
