@@ -151,5 +151,19 @@ public class PersonCollection {
             System.out.println(count);
         }
     }
+    
+    private static final ArrayList<Double> uniq = new ArrayList<>();
+
+    public static void printUniqueLocation() {
+        for (Person person : treeSet) {
+            double X = person.getLocation().getX();
+            if (!uniq.contains(X)) {
+                uniq.add(X);
+            } else {
+                uniq.remove(X);
+            }
+        }
+        System.out.println(uniq);
+    }
 }
 
