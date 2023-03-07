@@ -165,5 +165,9 @@ public class PersonCollection {
         }
         System.out.println(uniq);
     }
+    
+    public static void info() {
+        System.out.println(treeSet.getClass().getName() + " " + PersonCollection.creationDate + " " + treeSet.size());
+    }
 }
 
