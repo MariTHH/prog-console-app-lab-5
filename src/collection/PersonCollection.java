@@ -133,16 +133,8 @@ public class PersonCollection {
         }
     }
     
-        public void removeGreater(Scanner sc) {
-        Person newPerson = ClientManager.getNewPerson(sc);
-        for (Person person : treeSet) {
-            if (person.getHeight() > newPerson.getHeight()) {
-                treeSet.remove(person);
-            }
-        }
-    }
     
-        public static void countEyeColor(int code) {
+    public static void countEyeColor(int code) {
         int count = 1;
         for (Person person : treeSet) {
             if (person.getEyeColor().getCode() == code) {
@@ -200,4 +192,5 @@ public class PersonCollection {
                 "update id {element} : обновить значение элемента коллекции, id которого равен заданному"
         );
     }
+}
 
