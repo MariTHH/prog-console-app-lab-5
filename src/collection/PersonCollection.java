@@ -32,11 +32,12 @@ public class PersonCollection {
         }
     }
 
-    public LocalDate getCreationDate() {
+    public Date getCreationDate() {
         return creationDate;
     }
     
-        public static TreeSet<Person> getCollection() {
+    
+    public static TreeSet<Person> getCollection() {
         return treeSet;
     }
 
