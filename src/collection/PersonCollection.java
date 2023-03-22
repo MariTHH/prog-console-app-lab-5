@@ -3,17 +3,22 @@ package collection;
 import client.ClientManager;
 import data.Person;
 
-import java.time.LocalDate;
-import java.util.Scanner;
-import java.util.TreeSet;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.annotation.*;
+import java.io.IOException;
+import java.util.*;
 
-import static java.time.LocalDate.*;
 
 /**
  * A class that implements collection related methods
  */
-
+@XmlRootElement(
+        name = "persons"
+)
+@XmlAccessorType(XmlAccessType.FIELD)
 public class PersonCollection {
+    @XmlElement(name = "Person")
+    private String filename = "s";
     private static TreeSet<Person> treeSet = new TreeSet<>();
     private static Date creationDate = new Date();
     
