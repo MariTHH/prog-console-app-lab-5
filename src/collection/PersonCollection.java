@@ -156,13 +156,13 @@ public class PersonCollection {
     
     
     public static void countEyeColor(int code) {
-        int count = 1;
+        int count = 0;
         for (Person person : treeSet) {
             if (person.getEyeColor().getCode() == code) {
                 count += 1;
             }
-            System.out.println(count);
         }
+        System.out.println(count);
     }
     
     private static final ArrayList<Double> uniq = new ArrayList<>();
