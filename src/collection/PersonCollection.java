@@ -213,5 +213,12 @@ public class PersonCollection {
                 "update id {element} : обновить значение элемента коллекции, id которого равен заданному"
         );
     }
+    public void save() {
+        try {
+            Parser.convertToXML(this, filename);
+        } catch (JAXBException | IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
 
