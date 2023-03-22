@@ -140,10 +140,17 @@ public class PersonCollection {
 
     public void removeGreater(Scanner sc) {
         Person newPerson = ClientManager.getNewPerson(sc);
+        boolean flag = true;
         for (Person person : treeSet) {
             if (person.getHeight() > newPerson.getHeight()) {
                 treeSet.remove(person);
+                System.out.println("Персонажы удалены: " + person.getName());
+            } else {
+                flag = false;
             }
+        }
+        if (!flag) {
+            System.out.println("Персонаж выше всех");
         }
     }
     
