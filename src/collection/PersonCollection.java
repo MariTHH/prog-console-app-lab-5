@@ -14,8 +14,16 @@ import static java.time.LocalDate.*;
  */
 
 public class PersonCollection {
-    private static TreeSet<Person> treeSet;
-    private static LocalDate creationDate;
+    private static TreeSet<Person> treeSet = new TreeSet<>();
+    private static Date creationDate = new Date();
+    
+    public PersonCollection(TreeSet<Person> treeSet, String filename) {
+        this.treeSet = treeSet;
+        this.filename = filename;
+    }
+    
+    public PersonCollection() {
+    }
 
     public static void initializeCollection() {
         if (treeSet == null) {
