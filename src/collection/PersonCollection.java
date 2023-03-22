@@ -41,11 +41,11 @@ public class PersonCollection {
         return treeSet;
     }
 
-     public static void addPerson(Person person) {
+    public static void addPerson(Person person) {
         treeSet.add(person);
     }
-    
-     public static void personInfo(Person person) {
+     
+    public static void personInfo(Person person) {
         System.out.println("ID: " + person.getId());
         System.out.println("Имя персонажа: " + person.getName());
         System.out.println("Координаты: X=" + person.getCoordinates().getX() + ", Y=" + person.getCoordinates().getY());
@@ -57,16 +57,16 @@ public class PersonCollection {
         System.out.println("Локация: " + person.getCoordinates().getX() + person.getCoordinates().getY() + person.getName());
     }
     
-        public static void information() {
-        if (treeSet == null) {
+    public void information() {
+        if (treeSet.isEmpty()) {
             System.out.println("В коллекции ничего нет");
         } else
             for (Person person : treeSet) {
-                PersonCollection.personInfo(person);
+                personInfo(person);
             }
     }
 
-        public void addIfMin(Scanner sc) {
+    public void addIfMin(Scanner sc) {
         Person person = ClientManager.getNewPerson(sc);
         if (treeSet == null) {
             addPerson(person);
@@ -81,7 +81,7 @@ public class PersonCollection {
         }
     }
 
-        public void addIfMax(Scanner sc) {
+    public void addIfMax(Scanner sc) {
         Person person = ClientManager.getNewPerson(sc);
         if (treeSet == null) {
             addPerson(person);
@@ -96,11 +96,11 @@ public class PersonCollection {
         }
     }
     
-        public static void clearCollection() {
+    public static void clearCollection() {
         treeSet.clear();
     }
     
-        public static boolean existID(int ID) {
+    public static boolean existID(int ID) {
         for (Person person : PersonCollection.getCollection()) {
             if (person.getId() == ID) {
                 return true;
@@ -109,7 +109,7 @@ public class PersonCollection {
         return false;
     }
 
-        public static void removePerson(int ID) {
+    public static void removePerson(int ID) {
         for (Person person : treeSet) {
             if (existID(ID)) {
                 treeSet.remove(person);
@@ -118,7 +118,7 @@ public class PersonCollection {
         }
     }
 
-        public static void updateElement(Person newPerson, int ID) {
+    public static void updateElement(Person newPerson, int ID) {
         for (Person person : treeSet) {
             if (person.getId() == ID) {
                 person.setName(newPerson.getName());
@@ -133,7 +133,7 @@ public class PersonCollection {
         }
     }
 
-        public void removeGreater(Scanner sc) {
+    public void removeGreater(Scanner sc) {
         Person newPerson = ClientManager.getNewPerson(sc);
         for (Person person : treeSet) {
             if (person.getHeight() > newPerson.getHeight()) {
@@ -167,7 +167,7 @@ public class PersonCollection {
         System.out.println(uniq);
     }
     
-       public static void filterGreater(String xString) {
+    public static void filterGreater(String xString) {
         double x = Double.parseDouble(xString);
         try {
             for (Person person : treeSet) {
@@ -183,7 +183,7 @@ public class PersonCollection {
     public static void info() {
         System.out.println(treeSet.getClass().getName() + " " + PersonCollection.creationDate + " " + treeSet.size());
     }
-}
+
 
     public static void help() {
         System.out.println("add {element} : добавить новый элемент в коллекцию \n" +
