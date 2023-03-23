@@ -1,14 +1,21 @@
 package commands;
 
+import client.InputManager;
 import collection.PersonCollection;
 import commands.availableCommands.*;
 
+import javax.xml.bind.JAXBException;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
 
 public class CommandManager {
-
-    private static PersonCollection personCollection;
-    private final static HashMap<String, Command> commandMap;
+    
+    private final PersonCollection personCollection;
+    private final InputManager inputManager;
+    private static boolean isWorking = true;
+    private static HashMap<String, Command> commandMap = new HashMap();
 
     static {
         commandMap = new HashMap<>();
