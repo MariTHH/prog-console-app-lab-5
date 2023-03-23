@@ -65,6 +65,7 @@ public class Person implements Comparable<Person> {
         this.location = location;
     }
 
+    @XmlTransient
     public String getName() {
         return this.name;
     }
@@ -73,10 +74,12 @@ public class Person implements Comparable<Person> {
         this.name = name;
     }
 
+    @XmlTransient
     public int getId() {
         return this.id;
     }
 
+    @XmlTransient
     public Coordinates getCoordinates() {
         return this.coordinates;
     }
@@ -85,14 +88,16 @@ public class Person implements Comparable<Person> {
         this.coordinates = coordinates;
     }
 
-    public LocalDate getCreationDate() {
+    @XmlTransient
+    public ZonedDateTime getCreationDate() {
         return this.creationDate;
     }
 
-    public void setCreationDate(LocalDate creationDate) {
+    public void setCreationDate(ZonedDateTim creationDate) {
         this.creationDate = creationDate;
     }
 
+    @XmlTransient
     public int getHeight() {
         return this.height;
     }
@@ -101,6 +106,7 @@ public class Person implements Comparable<Person> {
         this.height = height;
     }
 
+    @XmlTransient
     public Color getEyeColor() {
         return this.eyeColor;
     }
@@ -109,6 +115,7 @@ public class Person implements Comparable<Person> {
         this.eyeColor = eyeColor;
     }
 
+    @XmlTransient
     public Color getHairColor() {
         return this.hairColor;
     }
@@ -117,6 +124,7 @@ public class Person implements Comparable<Person> {
         this.hairColor = hairColor;
     }
 
+    @XmlTransient
     public Country getNationality() {
         return this.nationality;
     }
@@ -125,6 +133,7 @@ public class Person implements Comparable<Person> {
         this.nationality = nationality;
     }
 
+    @XmlTransient
     public Location getLocation() {
         return this.location;
     }
