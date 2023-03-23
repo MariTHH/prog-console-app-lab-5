@@ -7,14 +7,11 @@ import java.util.TreeSet;
 import comparator.HeightComparator;
 
 public class Main {
-    public static void main(String[] args) {
-
+    public static void main(String[] args) throws JAXBException, IOException {
         PersonCollection collection = new PersonCollection();
-        CommandManager.setPersonCollection(collection);
-        PersonCollection.initializeCollection();
-        Scanner sc = new Scanner(System.in);
-        CommandManager commandManager = new CommandManager();
-        CommandManager.existCommand(new String[]{"add"});
-        CommandManager.existCommand(new String[]{"help"});
+        new CommandManager(collection);
+        while (CommandManager.getWork()) {
+            CommandManager.existCommand();
+        }
     }
 }
