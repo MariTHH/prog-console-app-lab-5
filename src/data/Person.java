@@ -1,26 +1,63 @@
 package data;
 
 import collection.GenerationId;
+import com.sun.istack.NotNull;
 
-import java.time.LocalDate;
+import javax.xml.bind.annotation.*;
+import java.time.ZonedDateTime;
 
 public class Person implements Comparable<Person> {
-    private int id;
+    private final int id;
+    @XmlElement(
+            name = "name",
+            required = true
+    )
+    @NotNull
     private String name;
+    @XmlElement(
+            name = "coordinates",
+            required = true
+    )
+    @NotNull
     private Coordinates coordinates;
-    private java.time.LocalDate creationDate;
+    @XmlTransient
+    private ZonedDataTime creationDate;
+    @XmlElement(
+            name = "height",
+            required = true
+    )
     private int height;
+    @XmlElement(
+            name = "eyeColor",
+            required = true
+    )
     private Color eyeColor;
+    @XmlElement(
+            name = "hairColor",
+            required = true
+    )
     private Color hairColor;
+    @XmlElement(
+            name = "nationality",
+            required = true
+    )
     private Country nationality;
+    @XmlElement(
+            name = "location",
+            required = true
+    )
     private Location location;
-
+    
+    public Person() {
+        this.id = GenerationId.generateID();
+        this.creationDate = ZonedDateTime.now();
+    }
 
     public Person(String name, Coordinates coordinates, int height, Color eyeColor, Color hairColor, Country nationality, Location location) {
         this.id = GenerationId.generateID();
         this.name = name;
         this.coordinates = coordinates;
-        this.creationDate = java.time.LocalDate.now();
+        this.creationDate = ZonedDataTime.now();
         this.height = height;
         this.eyeColor = eyeColor;
         this.hairColor = hairColor;
