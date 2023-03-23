@@ -10,11 +10,16 @@ import data.Color;
  * display the number of elements whose eyeColor field value is greater than the set value
  */
 public class CountGreaterThanEyeColor extends Command {
+    private final PersonCollection personCollection;
 
+    public CountGreaterThanEyeColor (PersonCollection personCollection) {
+        this.personCollection = personCollection;
+    }
+    
     @Override
     public void execute(String[] args) {
         if (args.length != 2) {
-            System.out.println("Неправильный формат команды! Команда не будет выполнена.");
+            System.out.println("Вы неправильно ввели команду");
         } else {
             countGreater(args[1]);
         }
