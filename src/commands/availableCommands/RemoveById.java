@@ -7,11 +7,17 @@ import commands.Command;
  * Command remove_by_id id : remove an item from the collection by its id
  */
 public class RemoveById extends Command {
+    private static PersonCollection personCollection;
+
+    public RemoveById (PersonCollection personCollection) {
+        this.personCollection = personCollection;
+    }
+    
     public static void remove_by_id(String arg) {
         try {
             int ID = Integer.parseInt(arg);
-            if (PersonCollection.existID(ID)) {
-                PersonCollection.removePerson(ID);
+            if (personCollection.existID(ID)) {
+                personCollection.removePerson(ID);
                 System.out.println("Персонаж удален");
             } else {
                 System.out.println("Этого персонажа не существует");
