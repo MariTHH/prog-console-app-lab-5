@@ -8,6 +8,12 @@ import commands.Command;
  * display elements whose location field value is greater than the given one
  */
 public class FilterGreaterThanLocation extends Command {
+    private final PersonCollection personCollection;
+
+    public FilterGreaterThanLocation (PersonCollection personCollection) {
+        this.personCollection = personCollection;
+    }
+    
     @Override
     public void execute(String[] args) {
         if (args.length != 2) {
