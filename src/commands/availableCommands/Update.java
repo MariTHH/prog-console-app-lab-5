@@ -10,6 +10,11 @@ import java.util.Scanner;
  * Command update id {element} : update the value of the collection item whose id is equal to the given one
  */
 public class Update extends Command {
+    private final PersonCollection personCollection;
+
+    public Update (PersonCollection personCollection) {
+        this.personCollection = personCollection;
+    }
 
     @Override
     public void execute(String[] args) {
@@ -24,8 +29,8 @@ public class Update extends Command {
     public void update(String arg, Scanner sc) {
         try {
             int ID = Integer.parseInt(arg);
-            if (PersonCollection.existID(ID)) {
-                PersonCollection.updateElement(ClientManager.getNewPerson(sc), ID);
+            if (personCollection.existID(ID)) {
+                personCollection.updateElement(ClientManager.getNewPerson(sc), ID);
                 System.out.println("ID человека обновлено");
             } else {
                 System.out.println("Человека с таким ID не существует");
