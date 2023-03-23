@@ -9,7 +9,11 @@ import java.util.Scanner;
  * Command remove_greater {element} : remove all elements from the collection that exceed the specified
  */
 public class RemoveGreater extends Command {
-    private PersonCollection recevier;
+    private final PersonCollection personCollection;
+
+    public RemoveGreater(PersonCollection personCollection) {
+        this.personCollection = personCollection;
+    }
 
     @Override
     public void execute(String[] args) {
@@ -17,8 +21,7 @@ public class RemoveGreater extends Command {
             System.out.println("Вы неправильно ввели команду");
         } else {
             Scanner sc = new Scanner(System.in);
-            recevier.removeGreater(sc);
-            System.out.println("Элементы удалены");
+            personCollection.removeGreater(sc);
         }
     }
 }
