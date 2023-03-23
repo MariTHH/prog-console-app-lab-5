@@ -10,21 +10,22 @@ import java.util.Scanner;
  * Command add {element} : add a new element to the collection
  */
 public class Add extends Command {
-    private Add recevier;
+    private final PersonCollection personCollection;
+
+    public Add(PersonCollection personCollection) {
+        this.personCollection = personCollection;
+    }
 
     @Override
     public void execute(String[] args) {
-        if (args.length != 0) {
+        if (args.length > 1) {
             System.out.println("Вы неправильно ввели команду");
         } else {
             Scanner sc = new Scanner(System.in);
-            recevier.add(sc);
+            personCollection.addPerson(ClientManager.getNewPerson(sc));
+            System.out.println("Ваш персонаж теперь в коллекции");
         }
     }
 
-    public void add(Scanner sc) {
-        PersonCollection.addPerson(ClientManager.getNewPerson(sc));
-        System.out.println("Ваш персонаж теперь в коллекции");
-    }
 
 }
