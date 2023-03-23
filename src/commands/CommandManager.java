@@ -16,48 +16,75 @@ public class CommandManager {
     private final InputManager inputManager;
     private static boolean isWorking = true;
     private static HashMap<String, Command> commandMap = new HashMap();
-
-    static {
-        commandMap = new HashMap<>();
-        commandMap.put("add", new Add());
-        commandMap.put("add_if_max", new AddIfMax());
-        commandMap.put("add_if_min", new AddIfMin());
-        commandMap.put("clear", new Clear());
-        commandMap.put("remove_by_id", new RemoveById());
-        commandMap.put("show", new Show());
-        commandMap.put("removeGreater", new RemoveGreater());
-        commandMap.put("countGreater", new CountGreaterThanEyeColor());
-        commandMap.put("update", new Update());
-        commandMap.put("filter_greater_than_location", new FilterGreaterThanLocation());
-        commandMap.put("print_unique_location", new PrintUniqueLocation());
-        commandMap.put("info", new Info());
-        commandMap.put("help", new Help());
+    
+    public CommandManager(PersonCollection personCollection, InputManager inputManager) {
+            this.personCollection = personCollection;
+            this.inputManager = inputManager;
+            commandMap = new HashMap<>();
+            commandMap.put("add", new Add(personCollection));
+            commandMap.put("add_if_max", new AddIfMax(personCollection));
+            commandMap.put("add_if_min", new AddIfMin(personCollection));
+            commandMap.put("clear", new Clear(personCollection));
+            commandMap.put("remove_by_id", new RemoveById(personCollection));
+            commandMap.put("show", new Show(personCollection));
+            commandMap.put("remove_greater", new RemoveGreater(personCollection));
+            commandMap.put("count_greater_than_eye_color", new CountGreaterThanEyeColor(personCollection));
+            commandMap.put("update", new Update(personCollection));
+            commandMap.put("filter_greater_than_location", new FilterGreaterThanLocation(personCollection));
+            commandMap.put("print_unique_location", new PrintUniqueLocation(personCollection));
+            commandMap.put("info", new Info(personCollection));
+            commandMap.put("help", new Help());
+            commandMap.put("save", new Save(personCollection));
+            commandMap.put("exit", new Exit());
+            commandMap.put("execute_script", new ExecuteScript(inputManager));
     }
+
 
     public static HashMap<String, Command> getCommandMap() {
         return commandMap;
     }
 
-    public static void setPersonCollection(PersonCollection personCollection) {
-        CommandManager.personCollection = personCollection;
-    }
 
     public static PersonCollection getPersonCollection() {
         return CommandManager.personCollection;
     }
 
-    public void existCommand(String[] name) {
+    public static void existCommand() {
+        Scanner sc = new Scanner(System.in);
         try {
-            if (name.length > 0) {
-                Command command = commandMap.get(name[0]);
-                command.execute(name);
+            System.out.println("Введите команду: ");
+            String command = sc.nextLine().trim();
+
+            String[] commandArg = command.split(" ");
+            String argument;
+
+            if (commandArg.length == 1)
+                argument = null;
+            else if (commandArg.length == 2)
+                argument = commandArg[1];
+            else {
+                return;
+            }
+
+            if (commandMap.containsKey(commandArg[0])) {
+                commandMap.get(commandArg[0]).setArgument(argument);
+                try {
+                    commandMap.get(commandArg[0]).execute(commandArg);
+                } catch (JAXBException | IOException e) {
+                    throw new RuntimeException(e);
+                }
             } else {
-                System.out.println("Вы не ввели команду");
+                System.out.println("Команды " + commandArg[0] + " не существует");
             }
-        } catch (IllegalStateException | NullPointerException e) {
-            if (name[0].equals("")) {
-                System.out.println("Команды " + name[0] + " не существует");
-            }
+        } catch (NoSuchElementException e) {
+            System.out.println("На этом все");
+            isWorking = false;
+            System.exit(0);
         }
     }
+    
+    public static boolean getWork() {
+        return isWorking;
+    }
+
 }
