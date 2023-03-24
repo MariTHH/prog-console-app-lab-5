@@ -13,13 +13,11 @@ import java.util.Scanner;
 public class CommandManager {
     
     private final PersonCollection personCollection;
-    private final InputManager inputManager;
     private static boolean isWorking = true;
     private static HashMap<String, Command> commandMap = new HashMap();
     
-    public CommandManager(PersonCollection personCollection, InputManager inputManager) {
+    public CommandManager(PersonCollection personCollection) {
             this.personCollection = personCollection;
-            this.inputManager = inputManager;
             commandMap = new HashMap<>();
             commandMap.put("add", new Add(personCollection));
             commandMap.put("add_if_max", new AddIfMax(personCollection));
@@ -36,7 +34,7 @@ public class CommandManager {
             commandMap.put("help", new Help());
             commandMap.put("save", new Save(personCollection));
             commandMap.put("exit", new Exit());
-            commandMap.put("execute_script", new ExecuteScript(inputManager));
+            commandMap.put("execute_script", new ExecuteScript());
     }
 
 
@@ -86,5 +84,8 @@ public class CommandManager {
     public static boolean getWork() {
         return isWorking;
     }
-
+    
+    public static HashMap<String, Command> getCommandMap() {
+        return commandMap;
+    }
 }
