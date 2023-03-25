@@ -18,11 +18,10 @@ public class GenerationId {
      */
     public static int generateID() {
         int id = random.nextInt(Integer.MAX_VALUE);
-        if (arg.contains(id)) {
-            while (arg.contains(id)) {
-                id = random.nextInt(Integer.MAX_VALUE);
-            }
-        } 
+        while (arg.contains(id)) {
+            id = random.nextInt(Integer.MAX_VALUE);
+        }
+        arg.add(id);
         return id;
     }
 }
