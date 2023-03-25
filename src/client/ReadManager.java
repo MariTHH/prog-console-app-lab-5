@@ -67,7 +67,7 @@ public class ReadManager {
             try {
                 String Y_string = sc.nextLine().trim();
                 int Y = Integer.parseInt(Y_string);
-                if (Y_string.equals("")) {
+                if (!Y_string.equals("")) {
                     return Y;
                 } else {
                     System.out.println("Вы должны ввести число, а не пустую строку");
@@ -149,7 +149,7 @@ public class ReadManager {
             try {
                 String Y_s = sc.nextLine().trim();
                 float Y = Float.parseFloat(Y_s);
-                if (Y_s.equals("")) {
+                if (!Y_s.equals("")) {
                     return Y;
                 } else {
                     System.out.println("Вы должны ввести число, а не пустую строку");
