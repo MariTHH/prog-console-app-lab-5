@@ -9,6 +9,7 @@ import java.util.Random;
 public class GenerationId {
 
     private static final HashSet<Integer> arg = new HashSet<>();
+    private static final Random random = new Random();
     
     /**
      * generates a unique id greater than zero 
@@ -16,16 +17,12 @@ public class GenerationId {
      * @return id (int)
      */
     public static int generateID() {
-        int id = new Random().nextInt();
+        int id = random.nextInt(Integer.MAX_VALUE);
         if (arg.contains(id)) {
             while (arg.contains(id)) {
-                id = new Random().nextInt();
+                id = random.nextInt(Integer.MAX_VALUE);
             }
-        } else {
-            while (id < 0) {
-                id = new Random().nextInt();
-            } arg.add(id);
-        }
+        } 
         return id;
     }
 }
