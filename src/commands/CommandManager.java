@@ -94,7 +94,4 @@ public class CommandManager {
         return isWorking;
     }
     
-    public static HashMap<String, Command> getCommandMap() {
-        return commandMap;
-    }
 }
