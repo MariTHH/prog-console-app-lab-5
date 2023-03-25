@@ -142,16 +142,8 @@ public class Person implements Comparable<Person> {
         this.location = location;
     }
 
-    public int compareTo(Person person) { // height comparison
-        if (this.height - person.getHeight() > 0) {
-            return 1;
-        } else {
-            if (this.height - person.getHeight() == 0) {
-                return 0;
-            } else {
-                return -1;
-            }
-        }
+    public int compareTo(Person person) { 
+        return Integer.compare(this.height - person.getHeight(), 0);
     }
     
 }
