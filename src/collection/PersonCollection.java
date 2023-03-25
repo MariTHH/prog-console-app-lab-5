@@ -5,6 +5,7 @@ import data.Person;
 
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.annotation.*;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 
@@ -253,15 +254,38 @@ public class PersonCollection {
                 "update id {element} : обновить значение элемента коллекции, id которого равен заданному"
         );
     }
+        
     /**
-     *set collection
+     * set collection
+     *
      * @param treeSet
      */
-    public void save() {
+    public void setCollection(TreeSet<Person> treeSet) {
+
+        for (Person person : treeSet) {
+            person.setName(person.getName());
+            person.setNationality(person.getNationality());
+            person.setCoordinates(person.getCoordinates());
+            person.setEyeColor(person.getEyeColor());
+            person.setHairColor(person.getHairColor());
+            person.setLocation(person.getLocation());
+            person.setHeight(person.getHeight());
+        }
+
+        this.treeSet = treeSet;
+    }
+    
+    /**
+     * saves collection to file XML
+     *
+     * @throws JAXBException
+     * @throws IOException
+     */
+    public void save() throws JAXBException, IOException {
         try {
             Parser.convertToXML(this, filename);
-        } catch (JAXBException | IOException e) {
-            throw new RuntimeException(e);
+        } catch (FileNotFoundException e) {
+            System.out.println("Файл для сохранения не найден");
         }
     }
 }
