@@ -17,7 +17,9 @@ public class GenerationId {
                 id = new Random().nextInt();
             }
         } else {
-            arg.add(id);
+            while (id < 0) {
+                id = new Random().nextInt();
+            } arg.add(id);
         }
         return id;
     }
