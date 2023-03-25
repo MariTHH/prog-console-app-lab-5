@@ -11,7 +11,6 @@ public class Exit extends Command {
         if (args.length>1){
             System.out.println("Вы неправильно ввели команду");
         } else {
-            //CommandManager.setWork(false);
             System.out.println("Удачи");
             System.exit(0);
 
