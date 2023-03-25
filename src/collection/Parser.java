@@ -9,24 +9,47 @@ import java.io.IOException;
 public final class Parser {
     public Parser() {
     }
-
-    public static void convertToXML(PersonCollection collection, String filename) throws JAXBException, IOException {
+    
+    /**
+     *converts JavaObject to XML file
+     * @param collection
+     * @param Path
+     * @throws JAXBException
+     * @throws IOException
+     */
+    public static void convertToXML(PersonCollection collection, String Path) throws JAXBException, IOException {
         try{
+            Scanner filename = new Scanner(System.in);
+            Path = filename.nextLine();
             JAXBContext context = JAXBContext.newInstance(PersonCollection.class);
             Marshaller marshaller = context.createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
-            BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(filename));
+            BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(Path));
             marshaller.marshal(collection, bufferedOutputStream);
             bufferedOutputStream.close();
            } catch (IOException | JAXBException e) {
-            e.printStackTrace();
+                System.out.println("Права к файлу ограничены");
         }
     }
-
-    public static PersonCollection convertToJavaObject(File filename) throws JAXBException {
-        JAXBContext context = JAXBContext.newInstance(PersonCollection.class);
-        Unmarshaller unmarshaller = context.createUnmarshaller();
-        return (PersonCollection) unmarshaller.unmarshal(filename);
+    
+    /**
+     *converts XML to JavaObject
+     * @param file
+     * @return
+     * @throws JAXBException
+     */
+    public static PersonCollection convertToJavaObject(File file) throws JAXBException {
+        try{
+            JAXBContext context = JAXBContext.newInstance(PersonCollection.class);
+            Unmarshaller unmarshaller = context.createUnmarshaller();
+            return (PersonCollection) unmarshaller.unmarshal(file);
+        } catch (JAXBException e) {
+            throw new JAXBException("Ошибка при конвертации коллекции из xml");
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Указанный файл не найден");
+        } catch (NullPointerException e) {
+            throw new RuntimeException();
+        }
     }
 }
