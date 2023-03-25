@@ -22,8 +22,6 @@ public class ClientManager {
         Color eyeColor = ReadManager.readColor(sc);
         Color hairColor = ReadManager.readColor(sc);
         Country nationality = ReadManager.readCountry(sc);
-        ZonedDateTime zdt = ZonedDateTime.now();
-        String zd = String.valueOf(zdt);
 
 
         return new Person(name, new Coordinates(X, Y), height, eyeColor, hairColor, nationality, new Location(X2, Y2, location));
