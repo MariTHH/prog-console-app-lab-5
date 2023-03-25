@@ -10,6 +10,12 @@ import java.util.Scanner;
  * The class is responsible for what the user enters
  */
 public class ReadManager {
+    /**
+     * method checks if the name is entered correctly, it contains only letters or not
+     *
+     * @param sc
+     * @return name
+     */
     public static String readName(Scanner sc) {
         System.out.println("Введите имя персонажа ");
         String name = sc.nextLine().trim();
@@ -26,6 +32,12 @@ public class ReadManager {
         }
     }
     
+     /**
+     * checks if the entered coordinate is correct, whether a number is entered or not
+     *
+     * @param sc
+     * @return X
+     */
     public static Long readCoordinatesX(Scanner sc) {
         System.out.println("Введите координату X");
         while (true) {
@@ -38,11 +50,17 @@ public class ReadManager {
                     System.out.println("Вы должны ввести число, а не пустую строку");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Вы ввели не число");
+                System.out.println("Число введено неверно");
             }
         }
     }
-
+    
+    /**
+     * checks if the entered coordinate is correct, whether a number is entered or not
+     *
+     * @param sc
+     * @return Y
+     */
     public static Integer readCoordinatesY(Scanner sc) {
         System.out.println("Введите координату Y");
         while (true) {
@@ -55,11 +73,17 @@ public class ReadManager {
                     System.out.println("Вы должны ввести число, а не пустую строку");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Вы ввели не число");
+                System.out.println("Число введено неверно");
             }
         }
     }
     
+    /**
+     * checks the correctness of the entered growth, whether the number is entered or not, check for zero
+     *
+     * @param sc
+     * @return height
+     */
     public static Integer readHeight(Scanner sc) {
         System.out.println("Введите рост персонажа");
         while (true) {
@@ -72,11 +96,17 @@ public class ReadManager {
                     System.out.println("Рост должен быть больше 0");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Вы ввели не число");
+                System.out.println("Число введено неверно");
             }
         }
     }
     
+    /**
+     * checks if the location name is correct, it must be less than 944 and not null
+     *
+     * @param sc
+     * @return location
+     */
     public static String readLocationName(Scanner sc) {
         System.out.println("Введите название локации");
         String location = sc.nextLine().trim();
@@ -125,11 +155,17 @@ public class ReadManager {
                     System.out.println("Вы должны ввести число, а не пустую строку");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Вы ввели не число");
+                System.out.println("Число введено неверно");
             }
         }
     }
     
+    /**
+     * checks the existence of the entered color
+     *
+     * @param colors
+     * @return boolean true or false
+     */
     public static boolean doesThisColorTypeExist(String colors) {
         for (Color ourColor : Color.values()) {
             if (ourColor.name().equals(colors)) {
@@ -152,9 +188,15 @@ public class ReadManager {
         return Enum.valueOf(Color.class, type);
     }
     
-    public static boolean doesThisCountryTypeExist(String test) {
+    /**
+     * checks the existence of the entered country
+     *
+     * @param country
+     * @return
+     */
+    public static boolean doesThisCountryTypeExist(String country) {
         for (Country c : Country.values()) {
-            if (c.name().equals(test)) {
+            if (c.name().equals(country)) {
                 return true;
             }
         }
