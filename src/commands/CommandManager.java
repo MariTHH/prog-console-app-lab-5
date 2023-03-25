@@ -1,6 +1,5 @@
 package commands;
 
-import client.InputManager;
 import collection.PersonCollection;
 import commands.availableCommands.*;
 
@@ -10,12 +9,19 @@ import java.util.HashMap;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+/**
+ * The class is responsible for checking for the correctness of commands and running them
+ */
 public class CommandManager {
-    
     private final PersonCollection personCollection;
     private static boolean isWorking = true;
     private static HashMap<String, Command> commandMap = new HashMap();
     
+    /**
+     * creates a commandMap with commands
+     *
+     * @param personCollection
+     */
     public CommandManager(PersonCollection personCollection) {
             this.personCollection = personCollection;
             commandMap = new HashMap<>();
@@ -46,7 +52,10 @@ public class CommandManager {
     public static PersonCollection getPersonCollection() {
         return CommandManager.personCollection;
     }
-
+    
+    /**
+     *checks for the correctness of the command and starts
+     */
     public static void existCommand() {
         Scanner sc = new Scanner(System.in);
         try {
