@@ -30,26 +30,29 @@ public class PersonCollection {
     public PersonCollection() {
     }
 
-    public static void initializeCollection() {
-        if (treeSet == null) {
-            treeSet = new TreeSet<>();
-            creationDate = now();
-        }
-    }
 
     public Date getCreationDate() {
         return creationDate;
     }
     
-    
+    /**
+     *
+     * @return
+     */
     public static TreeSet<Person> getCollection() {
         return treeSet;
     }
-
+    /**
+     *adds Person
+     * @param person
+     */
     public static void addPerson(Person person) {
         treeSet.add(person);
     }
-     
+    /**
+     * displays information about the character with all fields
+     * @param person
+     */
     public static void personInfo(Person person) {
         System.out.println("ID: " + person.getId());
         System.out.println("Имя персонажа: " + person.getName());
@@ -61,7 +64,9 @@ public class PersonCollection {
         System.out.println("Страна: " + person.getNationality());
         System.out.println("Локация: " + person.getCoordinates().getX() + person.getCoordinates().getY() + person.getName());
     }
-    
+    /**
+     * displays information about each person
+     */
     public void information() {
         if (treeSet.isEmpty()) {
             System.out.println("В коллекции ничего нет");
@@ -70,7 +75,10 @@ public class PersonCollection {
                 personInfo(person);
             }
     }
-
+    /**
+     * adds a person if he is lower than the other
+     * @param sc
+     */
     public void addIfMin(Scanner sc) {
         Person person = ClientManager.getNewPerson(sc);
         if (treeSet == null) {
@@ -85,7 +93,11 @@ public class PersonCollection {
             }
         }
     }
-
+    
+    /**
+     * adds a person if he is higher than the other
+     * @param sc
+     */
     public void addIfMax(Scanner sc) {
         Person person = ClientManager.getNewPerson(sc);
         if (treeSet == null) {
@@ -100,11 +112,17 @@ public class PersonCollection {
             }
         }
     }
-    
+    /**
+     * clears the collection
+     */ 
     public static void clearCollection() {
         treeSet.clear();
     }
-    
+    /**
+     *
+     * @param ID could be int
+     * @return
+     */ 
     public static boolean existID(int ID) {
         for (Person person : PersonCollection.getCollection()) {
             if (person.getId() == ID) {
@@ -113,7 +131,10 @@ public class PersonCollection {
         }
         return false;
     }
-
+    /**
+     * removes person
+     * @param ID
+     */
     public static void removePerson(int ID) {
         for (Person person : treeSet) {
             if (existID(ID)) {
@@ -122,7 +143,11 @@ public class PersonCollection {
             }
         }
     }
-
+    /**
+     * updates data of person, ID stays the same
+     * @param newPerson
+     * @param ID
+     */
     public static void updateElement(Person newPerson, int ID) {
         for (Person person : treeSet) {
             if (person.getId() == ID) {
@@ -137,7 +162,10 @@ public class PersonCollection {
             }
         }
     }
-
+    /**
+     *removes the highest person
+     * @param sc
+     */
     public void removeGreater(Scanner sc) {
         Person newPerson = ClientManager.getNewPerson(sc);
         boolean flag = true;
@@ -154,7 +182,10 @@ public class PersonCollection {
         }
     }
     
-    
+    /**
+     *counter of persons whose color code is greater
+     * @param code
+     */
     public static void countEyeColor(int code) {
         int count = 0;
         for (Person person : treeSet) {
@@ -166,7 +197,9 @@ public class PersonCollection {
     }
     
     private static final ArrayList<Double> uniq = new ArrayList<>();
-
+    /**
+     *print a not repeated location
+     */
     public static void printUniqueLocation() {
         for (Person person : treeSet) {
             double X = person.getLocation().getX();
@@ -178,7 +211,10 @@ public class PersonCollection {
         }
         System.out.println(uniq);
     }
-    
+    /**
+     * filter of persons whose coordinate is greater
+     * @param xString
+     */
     public static void filterGreater(String xString) {
         double x = Double.parseDouble(xString);
         try {
@@ -191,12 +227,16 @@ public class PersonCollection {
             System.out.println("Вы неправильно ввели данные");
         }
     }
-    
+    /**
+     *print info about collection
+     */
     public static void info() {
         System.out.println(treeSet.getClass().getName() + " " + PersonCollection.creationDate + " " + treeSet.size());
     }
 
-
+    /**
+     *print information about available commands
+     */
     public static void help() {
         System.out.println("add {element} : добавить новый элемент в коллекцию \n" +
                 "add_if_max {element} : добавить новый элемент в коллекцию, если его значение превышает значение наибольшего элемента этой коллекции \n" +
@@ -213,6 +253,10 @@ public class PersonCollection {
                 "update id {element} : обновить значение элемента коллекции, id которого равен заданному"
         );
     }
+    /**
+     *set collection
+     * @param treeSet
+     */
     public void save() {
         try {
             Parser.convertToXML(this, filename);
