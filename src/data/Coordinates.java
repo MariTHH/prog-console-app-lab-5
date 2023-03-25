@@ -5,8 +5,8 @@ import javax.xml.bind.annotation.XmlType;
 
 @XmlType(propOrder = {"x", "y"})
 public class Coordinates {
-    private final long x;
-    private final int y;
+    private long x;
+    private int y;
 
     public Coordinates(long x, int y) {
         this.x = x;
