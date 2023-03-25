@@ -30,7 +30,7 @@ public class Location {
         return y;
     }
     
-        public void setY(float y) {
+    public void setY(float y) {
         this.y = y;
     }
 
@@ -38,7 +38,7 @@ public class Location {
         return name;
     }
 
-    public void setLocationName() {
+    public void setLocationName(String name) {
         this.name = name;
     }
     
