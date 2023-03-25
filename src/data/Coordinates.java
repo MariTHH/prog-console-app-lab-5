@@ -13,6 +13,10 @@ public class Coordinates {
         this.y = y;
     }
 
+    public Coordinates() {
+
+    }
+    
     public long getX() {
         return x;
     }
