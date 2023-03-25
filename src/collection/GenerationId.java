@@ -9,7 +9,12 @@ import java.util.Random;
 public class GenerationId {
 
     private static final HashSet<Integer> arg = new HashSet<>();
-
+    
+    /**
+     * generates a unique id greater than zero 
+     * 
+     * @return id (int)
+     */
     public static int generateID() {
         int id = new Random().nextInt();
         if (arg.contains(id)) {
