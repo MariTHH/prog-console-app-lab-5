@@ -24,7 +24,7 @@ public abstract class Command {
         return argument;
     }
 
-    public void setArgument(String argument) {
+    public void setArgument(Object argument) {
         this.argument = argument;
     }
     
