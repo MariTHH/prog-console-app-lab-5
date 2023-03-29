@@ -6,6 +6,9 @@ import com.sun.istack.NotNull;
 import javax.xml.bind.annotation.*;
 import java.time.ZonedDateTime;
 
+/**
+ * A class with a character constructor
+ */
 public class Person implements Comparable<Person> {
     private final int id;
     @XmlElement(
@@ -93,7 +96,7 @@ public class Person implements Comparable<Person> {
         return this.creationDate;
     }
 
-    public void setCreationDate(ZonedDateTim creationDate) {
+    public void setCreationDate(ZonedDateTime creationDate) {
         this.creationDate = creationDate;
     }
 
@@ -141,9 +144,14 @@ public class Person implements Comparable<Person> {
     public void setLocation(Location location) {
         this.location = location;
     }
-
+    
+    /**
+     * sorting the collection by height
+     *
+     * @param person the object to be compared.
+     * @return compare collection
+     */
     public int compareTo(Person person) { 
         return Integer.compare(this.height - person.getHeight(), 0);
     }
-    
 }
