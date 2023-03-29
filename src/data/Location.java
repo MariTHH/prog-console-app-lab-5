@@ -2,6 +2,9 @@ package data;
 
 import javax.xml.bind.annotation.*;
 
+/**
+ * A class with person location
+ */
 @XmlRootElement(name="Location")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Location {
@@ -42,7 +45,4 @@ public class Location {
         this.name = name;
     }
     
-    public String toString() {
-        return "Location{x=" + this.x + ", y=" + this.y + ", name=" + this.name + "}";
-    }
 }
