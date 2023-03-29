@@ -75,18 +75,16 @@ public class CommandManager {
 
             if (commandMap.containsKey(commandArg[0])) {
                 commandMap.get(commandArg[0]).setArgument(argument);
-                try {
-                    commandMap.get(commandArg[0]).execute(commandArg);
-                } catch (JAXBException | IOException e) {
-                    throw new RuntimeException(e);
-                }
+                commandMap.get(commandArg[0]).execute(commandArg);       
             } else {
                 System.out.println("Команды " + commandArg[0] + " не существует");
             }
         } catch (NoSuchElementException e) {
-            System.out.println("На этом все");
+            System.out.println("Команда введена неверно");
             isWorking = false;
             System.exit(0);
+        } catch (JAXBException | IOException e) {
+            System.out.println("Файл не найден");
         }
     }
     
