@@ -1,10 +1,8 @@
 package client;
 
-import data.Color;
-import data.Country;
+import data.*;
 
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * The class is responsible for what the user enters
@@ -135,10 +133,10 @@ public class ReadManager {
                 if (!X_s.equals("")) {
                     return X;
                 } else {
-                    System.out.println("Значение не должно быть пустым. Попробуйте ещё раз.");
+                    System.out.println("Вы должны ввести число, а не пустую строку");
                 }
             } catch (NumberFormatException e) {
-                System.out.println("Введённое значение не является числом. Попробуйте еще раз.");
+                System.out.println("Число введено неверно");
             }
         }
     }
@@ -177,15 +175,29 @@ public class ReadManager {
 
     public static Color readColor(Scanner sc) {
         System.out.println("Выберите любой цвет из предложенных" + Arrays.asList(Color.values()));
-        String type = sc.nextLine().trim();
-        if (!doesThisColorTypeExist(type) || type.equals("")) {
-            while (!doesThisColorTypeExist(type)) {
-                System.out.println("Такого цвета нет, выберите один из предложенных");
-                type = sc.nextLine().trim();
-                doesThisColorTypeExist(type);
+        while (true) {
+            try {
+                String type = sc.nextLine().trim();
+                int code = Integer.parseInt(type);
+                if (!type.equals("")) {
+                    for (Color ourColor : Color.values()) {
+                        if (ourColor.getCode() == code) {
+                            String color = String.valueOf(ourColor);
+                            return Enum.valueOf(Color.class, color);
+                        }
+                    }
+                    {
+                        System.out.println("Данного цвета не существует. Выберите цвет из списка!!");
+                    }
+
+                } else {
+                    System.out.println("Вы должны ввести число, а не пустую строку");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Число введено неверно");
+
             }
         }
-        return Enum.valueOf(Color.class, type);
     }
     
     /**
@@ -195,8 +207,8 @@ public class ReadManager {
      * @return
      */
     public static boolean doesThisCountryTypeExist(String country) {
-        for (Country c : Country.values()) {
-            if (c.name().equals(country)) {
+        for (Country ourCountry : Country.values()) {
+            if (ourCountry.name().equals(country)) {
                 return true;
             }
         }
@@ -205,15 +217,28 @@ public class ReadManager {
 
     public static Country readCountry(Scanner sc) {
         System.out.println("Выберите любую страну из предложенных" + Arrays.asList(Country.values()));
-        String type = sc.nextLine().trim();
-        if (!doesThisCountryTypeExist(type) || type.equals("")) {
-            while (!doesThisCountryTypeExist(type)) {
-                System.out.println("Такой страны нет, выберите одну из предложенных");
-                type = sc.nextLine().trim();
-                doesThisCountryTypeExist(type);
+        while (true) {
+            try {
+                String type = sc.nextLine().trim();
+                int code = Integer.parseInt(type);
+                if (!type.equals("")) {
+                    for (Country country : Country.values()) {
+                        if (country.getCode() == code) {
+                            String ourCountry = String.valueOf(country);
+                            return Enum.valueOf(Country.class, ourCountry);
+
+                        }
+                    }
+                    {
+                        System.out.println("Данной страны не существует. Выберите страну из списка!!");
+                    }
+                } else {
+                    System.out.println("Вы должны ввести число, а не пустую строку");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Число введено неверно");
             }
         }
-        return Enum.valueOf(Country.class, type);
     }
     
 }
