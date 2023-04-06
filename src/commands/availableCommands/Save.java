@@ -15,12 +15,14 @@ public class Save extends Command {
 
     @Override
     public void execute(String[] args) throws JAXBException, IOException {
-        if (args.length > 1) {
-            System.out.println("Вы неправильно ввели команду");
-            System.out.println(collection);
-        } else {
-            collection.save();
-
+        try {
+            if (args.length > 2) {
+                System.out.println("Вы неправильно ввели команду");
+            } else {
+                collection.save(args[1]);
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            collection.save(CommandManager.getFilelink());
         }
     }
   
