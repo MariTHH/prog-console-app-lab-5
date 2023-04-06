@@ -18,11 +18,14 @@ public class AddIfMin extends Command {
 
     @Override
     public void execute(String[] args) {
-        if (args.length > 1) {
-            System.out.println("Вы неправильно ввели команду");
-        } else {
-            Scanner sc = new Scanner(System.in);
-            personCollection.addIfMin(sc);
+        try {
+            if (args.length > 2) {
+                System.out.println("Вы неправильно ввели команду");
+            } else {
+                personCollection.addIfMin(args[1]);
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Недостаточно аргументов, обратитесь к команде help");
         }
     }
 }
