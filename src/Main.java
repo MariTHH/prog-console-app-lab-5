@@ -1,8 +1,9 @@
+import client.Console;
 import collection.PersonCollection;
 import commands.CommandManager;
 
 import java.io.*;
-import java.util.Scanner;
+import java.util.*;
 
 import javax.xml.bind.JAXBException;
 
@@ -12,22 +13,39 @@ import static collection.Parser.convertToJavaObject;
  * Main class starts the application
  */
 public class Main {
-    public static void main(String[] args) throws IOException, IllegalArgumentException {
+    public static void main(String[] args) throws IllegalArgumentException {
+
         try {
-            System.out.println("Введите название файла из которого будет взята коллекция");
-            Scanner scanner = new Scanner(System.in);
-            String Path = scanner.nextLine();
-            File file = new File(String.valueOf(Path));
             PersonCollection collection = new PersonCollection();
-            collection.setCollection(convertToJavaObject(file).getCollection());
-            new CommandManager(collection);
-            while (CommandManager.getWork()) {
-                CommandManager.existCommand();
+            Console console = new Console();
+
+            while (true) {
+                try {
+                    if (args.length > 0) {
+                        String link = args[0];
+                        File f = new File(link);
+                        if (f.exists() && !f.isDirectory()) {
+                            collection.setCollection(convertToJavaObject(f).getCollection());
+                            CommandManager commandManager = new CommandManager(collection);
+                            commandManager.setFilelink(link);
+                            while (CommandManager.getWork()) {
+                                CommandManager.existCommand();
+                            }
+                        } else {
+                            console.fileRead();
+                        }
+                    } else {
+                        console.fileRead();
+                    }
+                } catch (IllegalArgumentException e) {
+                    System.out.println(e.getMessage());
+                    console.fileRead();
+                }
             }
-        } catch (JAXBException | IllegalArgumentException | NoSuchElementException e) {
+        } catch (JAXBException | NoSuchElementException e) {
             System.out.println(e.getMessage());
             System.out.println("Приложение не может запуститься");
-
         }
     }
 }
+
