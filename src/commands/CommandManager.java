@@ -16,6 +16,7 @@ public class CommandManager {
     private final PersonCollection personCollection;
     private static boolean isWorking = true;
     private static HashMap<String, Command> commandMap = new HashMap();
+    private static String filelink;
     
     /**
      * creates a commandMap with commands
@@ -90,6 +91,14 @@ public class CommandManager {
     
     public static boolean getWork() {
         return isWorking;
+    }
+    
+    public static String getFilelink() {
+        return filelink;
+    }
+
+    public void setFilelink(String filelink) {
+        this.filelink = filelink;
     }
     
 }
