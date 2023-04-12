@@ -1,21 +1,19 @@
 package commands.availableCommands;
 
-import client.ReadManager;
 import collection.PersonCollection;
 import commands.Command;
 import data.Color;
 
 /**
- * count_greater_than_eye_color eyeColor :
- * display the number of elements whose eyeColor field value is greater than the set value
+ * count_greater_than_eye_color eyeColor
  */
 public class CountGreaterThanEyeColor extends Command {
     private final PersonCollection personCollection;
 
-    public CountGreaterThanEyeColor (PersonCollection personCollection) {
+    public CountGreaterThanEyeColor(PersonCollection personCollection) {
         this.personCollection = personCollection;
     }
-    
+
     @Override
     public void execute(String[] args) {
         if (args.length != 2) {
@@ -25,17 +23,28 @@ public class CountGreaterThanEyeColor extends Command {
         }
     }
 
-    public static void countGreater(String eyeColor_s) {
-        int code;
+    /**
+     * display the number of elements whose eyeColor field value is greater than the set value
+     *
+     * @param eyeColor_s
+     */
+    public void countGreater(String eyeColor_s) {
         try {
-            if (ReadManager.doesThisColorTypeExist(eyeColor_s)) {
-                code = Enum.valueOf(Color.class, eyeColor_s).getCode();
-                PersonCollection.countEyeColor(code);
-            } else {
+            String eyeColor = eyeColor_s.trim();
+            int code = Integer.parseInt(eyeColor);
+            boolean flag = false;
+
+            for (Color ourColor : Color.values()) {
+                if (ourColor.getCode() == code) {
+                    personCollection.countEyeColor(code);
+                    flag = true;
+                }
+            }
+            if (flag = false) {
                 System.out.println("Такого цвета нет в списке");
             }
         } catch (NumberFormatException e) {
-            System.out.println("Вы неправильно ввели команду");
+            System.out.println("Вы неправильно ввели аргумент команды");
         }
     }
 }

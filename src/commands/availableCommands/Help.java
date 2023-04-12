@@ -10,9 +10,10 @@ public class Help extends Command {
     @Override
     public void execute(String[] args) {
         if (args.length > 1) {
-            System.out.println("Вы неправильно ввели команду");
+            System.out.println("Проблема с аргументом, обратитесь к команде help");
         } else {
             PersonCollection.help();
         }
     }
 }
+

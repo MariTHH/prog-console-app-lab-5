@@ -1,6 +1,5 @@
 package commands.availableCommands;
 
-import client.ClientManager;
 import collection.PersonCollection;
 import commands.Command;
 import commands.CommandManager;
@@ -17,7 +16,8 @@ public class ExecuteScript extends Command {
     private final PersonCollection personCollection;
     private HashMap<String, Command> commandMap;
     private ArrayList<String> filePaths;
-    ArrayList<String> personList = new ArrayList<>();
+    static ArrayList<String> personList = new ArrayList<>();
+    static boolean flag = false;
 
     public ExecuteScript(PersonCollection personCollection) {
         this.personCollection = personCollection;
@@ -36,10 +36,10 @@ public class ExecuteScript extends Command {
      */
     @Override
     public void execute(String[] args) throws JAXBException, IOException {
-        if (args.length > 2) {
-            //если нет файла ошибка "впишите имя файла"
+        if (args.length != 2) {
             System.out.println("Вы неправильно ввели команду");
         } else {
+            flag = true;
             filePaths.add((String) getArgument());
             ArrayList<String> commandList = new ArrayList<>();
             try (Scanner reader = new Scanner(new FileInputStream((String) getArgument()))) {
@@ -68,7 +68,6 @@ public class ExecuteScript extends Command {
                     System.out.println("Введите комманду и аргумент, если нужно");
                     return;
                 }
-                Scanner reader = new Scanner(new FileInputStream((String) getArgument()));
                 boolean a = !commandAndArgument[0].equals("add") && !commandAndArgument[0].equals("add_if_min") && !commandAndArgument[0].equals("add_if_max") && !commandAndArgument[0].equals("update");
                 try {
                     if (commandMap.containsKey(commandAndArgument[0]) && a) {
@@ -85,37 +84,11 @@ public class ExecuteScript extends Command {
                         for (int j = 1; j < 11; j++) {
                             personList.add(commandList.get(i + j));
                         }
-                        switch (commandAndArgument[0]) {
-                            case "add" -> personCollection.addPerson(ClientManager.createPersonFromScript(personList));
-                            case "add_if_min" -> {
-                                if (personCollection.addIfMinForScript(commandAndArgument[1])) {
-                                    personList.set(6, commandAndArgument[1]);
-                                    personCollection.addPerson(ClientManager.createPersonFromScript(personList));
-                                }
-                            }
-                            case "add_if_max" -> {
-                                if (personCollection.addIfMaxForScript(commandAndArgument[1])) {
-                                    personList.set(6, commandAndArgument[1]);
-                                    personCollection.addPerson(ClientManager.createPersonFromScript(personList));
-                                }
-                            }
-                            case "update" -> {
-                                {
-                                    System.out.println("Введите ID для команды update");
-                                    Update update = new Update(personCollection);
-                                    Scanner scanner = new Scanner(System.in);
-                                    int line = Integer.parseInt(scanner.nextLine().trim());
-                                    if (update.updateForScript(String.valueOf(line))) {
-                                        int id = Integer.parseInt(String.valueOf(line));
-                                        personCollection.updateElement(ClientManager.createPersonFromScript(personList), id);
-                                    }
-                                }
-                            }
-
-                        }
+                        commandMap.get(commandAndArgument[0]).execute(commandAndArgument);
                         i += 10;
                     }
-                } catch (NullPointerException e) {
+
+                } catch (NullPointerException | IndexOutOfBoundsException e) {
                     System.out.println("Неверные данные в скрипте, персонаж не создан");
                 }
             }
@@ -123,6 +96,13 @@ public class ExecuteScript extends Command {
         }
     }
 
+    public static boolean getFlag() {
+        return flag;
+    }
+
+    public static ArrayList<String> getPersonList() {
+        return personList;
+    }
 }
 
 

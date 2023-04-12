@@ -12,7 +12,6 @@ public class Clear extends Command {
     public Clear (PersonCollection personCollection) {
         this.personCollection = personCollection;
     }
-
     @Override
     public void execute(String[] args) {
         if (args.length > 1) {
@@ -23,7 +22,7 @@ public class Clear extends Command {
     }
 
     public void clear() {
-        PersonCollection.clearCollection();
+        personCollection.clearCollection();
         System.out.println("Коллекция очищена");
     }
 }

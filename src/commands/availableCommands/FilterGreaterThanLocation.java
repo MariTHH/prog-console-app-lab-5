@@ -13,13 +13,13 @@ public class FilterGreaterThanLocation extends Command {
     public FilterGreaterThanLocation (PersonCollection personCollection) {
         this.personCollection = personCollection;
     }
-    
+
     @Override
     public void execute(String[] args) {
         if (args.length != 2) {
             System.out.println("Вы неправильно ввели команду");
         } else {
-            PersonCollection.filterGreater(args[1]);
+            personCollection.filterGreater(args[1]);
         }
     }
 }

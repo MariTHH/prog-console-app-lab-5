@@ -4,21 +4,34 @@ import client.ClientManager;
 import collection.PersonCollection;
 import commands.*;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
+
 /**
- * Command add {element} : add a new element to the collection
+ * Command add {element}
  */
 public class Add extends Command {
     private final PersonCollection personCollection;
 
     public Add(PersonCollection personCollection) {
         this.personCollection = personCollection;
+
     }
 
+
+    /**
+     * add a new element to the collection
+     *
+     * @param args
+     */
     @Override
-    public void execute(String[] args) {
-        if (args.length > 1) {
+    public void execute(String[] args) throws FileNotFoundException {
+        if (ExecuteScript.getFlag()) {
+            personCollection.addPerson(ClientManager.createPersonFromScript(ExecuteScript.getPersonList()));
+        } else if (args.length > 1) {
             System.out.println("Вы неправильно ввели команду");
         } else {
             Scanner sc = new Scanner(System.in);

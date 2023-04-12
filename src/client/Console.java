@@ -9,9 +9,6 @@ import java.util.Scanner;
 
 import static collection.Parser.convertToJavaObject;
 
-/**
- * Reads the file for the main
- */
 public class Console {
     PersonCollection collection = new PersonCollection();
     public void fileRead() throws JAXBException {

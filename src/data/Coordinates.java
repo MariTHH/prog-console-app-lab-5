@@ -3,6 +3,9 @@ package data;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+/**
+ * A class with person coordinates
+ */
 @XmlType(propOrder = {"x", "y"})
 public class Coordinates {
     private long x;
@@ -14,9 +17,8 @@ public class Coordinates {
     }
 
     public Coordinates() {
-
     }
-    
+
     public long getX() {
         return x;
     }
@@ -24,7 +26,7 @@ public class Coordinates {
     public int getY() {
         return y;
     }
-    
+
     @XmlElement
     public void setX(long x) {
         this.x = x;
@@ -34,5 +36,5 @@ public class Coordinates {
     public void setY(int y) {
         this.y = y;
     }
-    
+
 }

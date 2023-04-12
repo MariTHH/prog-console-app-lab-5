@@ -9,6 +9,7 @@ import java.time.ZonedDateTime;
 /**
  * A class with a character constructor
  */
+@XmlRootElement
 public class Person implements Comparable<Person> {
     private final int id;
     @XmlElement(
@@ -24,7 +25,7 @@ public class Person implements Comparable<Person> {
     @NotNull
     private Coordinates coordinates;
     @XmlTransient
-    private ZonedDataTime creationDate;
+    private ZonedDateTime creationDate;
     @XmlElement(
             name = "height",
             required = true
@@ -50,7 +51,7 @@ public class Person implements Comparable<Person> {
             required = true
     )
     private Location location;
-    
+
     public Person() {
         this.id = GenerationId.generateID();
         this.creationDate = ZonedDateTime.now();
@@ -60,12 +61,17 @@ public class Person implements Comparable<Person> {
         this.id = GenerationId.generateID();
         this.name = name;
         this.coordinates = coordinates;
-        this.creationDate = ZonedDataTime.now();
+        this.creationDate = ZonedDateTime.now();
         this.height = height;
         this.eyeColor = eyeColor;
         this.hairColor = hairColor;
         this.nationality = nationality;
         this.location = location;
+    }
+
+    @XmlTransient
+    public int getId() {
+        return this.id;
     }
 
     @XmlTransient
@@ -75,11 +81,6 @@ public class Person implements Comparable<Person> {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    @XmlTransient
-    public int getId() {
-        return this.id;
     }
 
     @XmlTransient
@@ -144,14 +145,16 @@ public class Person implements Comparable<Person> {
     public void setLocation(Location location) {
         this.location = location;
     }
-    
+
     /**
      * sorting the collection by height
      *
      * @param person the object to be compared.
      * @return compare collection
      */
-    public int compareTo(Person person) { 
+    public int compareTo(Person person) {
         return Integer.compare(this.height - person.getHeight(), 0);
     }
 }
+
+

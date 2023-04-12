@@ -1,5 +1,8 @@
 package data;
 
+/**
+ * Enum with colors and codes for it
+ */
 public enum Color {
     GREEN(1),
     RED(2),
@@ -10,7 +13,7 @@ public enum Color {
     WHITE(7);
     private final int code;
 
-    Color(Integer code) {
+    Color(int code) {
         this.code = code;
     }
 
@@ -18,4 +21,6 @@ public enum Color {
         return code;
     }
 
+
 }
+

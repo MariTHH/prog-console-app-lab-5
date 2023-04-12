@@ -19,42 +19,43 @@ import java.util.*;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class PersonCollection {
     @XmlElement(name = "Person")
-    private String filename = "s";
-    private static TreeSet<Person> treeSet = new TreeSet<>();
+    private String filename;
+    private TreeSet<Person> treeSet = new TreeSet<>();
     private static Date creationDate = new Date();
-    
+
+
     public PersonCollection(TreeSet<Person> treeSet, String filename) {
         this.treeSet = treeSet;
         this.filename = filename;
     }
-    
+
+
     public PersonCollection() {
     }
 
-
-    public Date getCreationDate() {
-        return creationDate;
-    }
-    
     /**
+     * adds Person
      *
+     * @param person
+     */
+    public void addPerson(Person person) {
+        treeSet.add(person);
+
+    }
+
+    /**
      * @return
      */
-    public static TreeSet<Person> getCollection() {
+    public TreeSet<Person> getCollection() {
         return treeSet;
     }
-    /**
-     *adds Person
-     * @param person
-     */
-    public static void addPerson(Person person) {
-        treeSet.add(person);
-    }
+
     /**
      * displays information about the character with all fields
+     *
      * @param person
      */
-    public static void personInfo(Person person) {
+    public void personInfo(Person person) {
         System.out.println("ID: " + person.getId());
         System.out.println("Имя персонажа: " + person.getName());
         System.out.println("Координаты: X=" + person.getCoordinates().getX() + ", Y=" + person.getCoordinates().getY());
@@ -63,8 +64,9 @@ public class PersonCollection {
         System.out.println("Цвет глаз: " + person.getEyeColor());
         System.out.println("Цвет волос: " + person.getHairColor());
         System.out.println("Страна: " + person.getNationality());
-        System.out.println("Локация: " + person.getCoordinates().getX() + person.getCoordinates().getY() + person.getName());
+        System.out.println("Локация: " + "X: " + person.getLocation().getX() + " Y: " + person.getLocation().getY() + " Название: " + person.getLocation().getLocationName());
     }
+
     /**
      * displays information about each person
      */
@@ -76,67 +78,82 @@ public class PersonCollection {
                 personInfo(person);
             }
     }
+
     /**
      * adds a person if he is lower than the other
+     *
      * @param sc
      */
-    public void addIfMin(Scanner sc) {
-        Person person = ClientManager.getNewPerson(sc);
-        if (treeSet == null) {
+    public void addIfMin(String sc) {
+        Scanner scanner = new Scanner(System.in);
+        String height_s = sc.trim();
+        int height_int = Integer.parseInt(height_s);
+        boolean flag = false;
+        for (Person person1 : treeSet) {
+            flag = height_int < person1.getHeight();
+
+        }
+        if (flag) {
+            Person person = ClientManager.getNewPerson(scanner);
             addPerson(person);
+            person.setHeight(height_int);
+            System.out.println("Самый низкий персонаж добавлен");
         } else {
-            for (Person person1 : treeSet) {
-                if (person1.compareTo(person) > 0) {
-                    addPerson(person);
-                } else {
-                    System.out.println("Персонаж не может быть добавлен");
-                }
-            }
+            System.out.println("Персонаж не ниже всех");
         }
     }
-    
+
+
     /**
      * adds a person if he is higher than the other
+     *
      * @param sc
      */
-    public void addIfMax(Scanner sc) {
-        Person person = ClientManager.getNewPerson(sc);
-        if (treeSet == null) {
+    public void addIfMax(String sc) {
+        Scanner scanner = new Scanner(System.in);
+        String height_s = sc.trim();
+        int height_int = Integer.parseInt(height_s);
+        boolean flag = false;
+        for (Person person1 : treeSet) {
+            flag = height_int > person1.getHeight();
+
+        }
+        if (flag) {
+            Person person = ClientManager.getNewPerson(scanner);
             addPerson(person);
+            person.setHeight(height_int);
+            System.out.println("Самый высокий персонаж добавлен");
         } else {
-            for (Person person1 : treeSet) {
-                if (person1.compareTo(person) < 0) {
-                    addPerson(person);
-                } else {
-                    System.out.println("Персонаж не может быть добавлен");
-                }
-            }
+            System.out.println("Персонаж не выше всех");
         }
     }
+
     /**
      * clears the collection
-     */ 
-    public static void clearCollection() {
+     */
+    public void clearCollection() {
         treeSet.clear();
     }
+
     /**
-     *
      * @param ID could be int
      * @return
-     */ 
-    public static boolean existID(int ID) {
-        for (Person person : PersonCollection.getCollection()) {
+     */
+    public boolean existID(int ID) {
+        for (Person person : treeSet) {
             if (person.getId() == ID) {
                 return true;
             }
         }
         return false;
     }
+
     /**
      * removes person
+     *
      * @param ID
      */
-    public static void removePerson(int ID) {
+    public void removePerson(int ID) {
         for (Person person : treeSet) {
             if (existID(ID)) {
                 treeSet.remove(person);
@@ -144,12 +161,14 @@ public class PersonCollection {
             }
         }
     }
+
     /**
      * updates data of person, ID stays the same
+     *
      * @param newPerson
      * @param ID
      */
-    public static void updateElement(Person newPerson, int ID) {
+    public void updateElement(Person newPerson, int ID) {
         for (Person person : treeSet) {
             if (person.getId() == ID) {
                 person.setName(newPerson.getName());
@@ -163,31 +182,26 @@ public class PersonCollection {
             }
         }
     }
+
     /**
-     *removes the highest person
+     * removes the highest person
+     *
      * @param sc
      */
-    public void removeGreater(Scanner sc) {
-        Person newPerson = ClientManager.getNewPerson(sc);
-        boolean flag = true;
-        for (Person person : treeSet) {
-            if (person.getHeight() > newPerson.getHeight()) {
-                treeSet.remove(person);
-                System.out.println("Персонажы удалены: " + person.getName());
-            } else {
-                flag = false;
-            }
-        }
-        if (!flag) {
-            System.out.println("Персонаж выше всех");
-        }
+    public void removeGreater(String sc) {
+        String height_s = sc.trim();
+        int height = Integer.parseInt(height_s);
+
+        treeSet.removeIf(person -> person.getHeight() > height);
+
     }
-    
+
     /**
-     *counter of persons whose color code is greater
+     * counter of persons whose color code is greater
+     *
      * @param code
      */
-    public static void countEyeColor(int code) {
+    public void countEyeColor(int code) {
         int count = 0;
         for (Person person : treeSet) {
             if (person.getEyeColor().getCode() == code) {
@@ -196,12 +210,32 @@ public class PersonCollection {
         }
         System.out.println(count);
     }
-    
-    private static final ArrayList<Double> uniq = new ArrayList<>();
+
     /**
-     *print a not repeated location
+     * filter of persons whose coordinate is greater
+     *
+     * @param xString
      */
-    public static void printUniqueLocation() {
+    public void filterGreater(String xString) {
+        try {
+            double x = Double.parseDouble(xString);
+
+            for (Person person : treeSet) {
+                if (person.getLocation().getX() > x) {
+                    System.out.println(person.getName() + " : " + person.getLocation().getX());
+                }
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Вы неправильно ввели данные");
+        }
+    }
+
+    private static final ArrayList<Double> uniq = new ArrayList<>();
+
+    /**
+     * print a not repeated location
+     */
+    public void printUniqueLocation() {
         for (Person person : treeSet) {
             double X = person.getLocation().getX();
             if (!uniq.contains(X)) {
@@ -212,53 +246,34 @@ public class PersonCollection {
         }
         System.out.println(uniq);
     }
+
     /**
-     * filter of persons whose coordinate is greater
-     * @param xString
+     * print info about collection
      */
-    public static void filterGreater(String xString) {
-        double x = Double.parseDouble(xString);
-        try {
-            for (Person person : treeSet) {
-                if (person.getLocation().getX() > x) {
-                    System.out.println(person.getName() + " : " + person.getLocation().getX());
-                }
-            }
-        } catch (NumberFormatException e) {
-            System.out.println("Вы неправильно ввели данные");
-        }
-    }
-    /**
-     *print info about collection
-     */
-    public static void info() {
+    public void info() {
         System.out.println(treeSet.getClass().getName() + " " + PersonCollection.creationDate + " " + treeSet.size());
     }
 
     /**
-     *print information about available commands
+     * print information about available commands
      */
     public static void help() {
-
-        System.out.println("""
-                add {element} : добавить новый элемент в коллекцию\s
-                add_if_max {element} : добавить новый элемент в коллекцию, если его значение превышает значение наибольшего элемента этой коллекции\s
-                add_if_min {element} : добавить новый элемент в коллекцию, если его значение меньше, чем у наименьшего элемента этой коллекции\s
-                clear : очистить коллекцию\s
-                count_greater_than_eye_color eyeColor : вывести количество элементов, значение поля eyeColor которых больше заданного\s
-                filter_greater_than_location location : вывести элементы, значение поля location которых больше заданного\s
-                save : сохранить коллекцию в файл\s
-                execute_script file_name : считать и исполнить скрипт из указанного файла. В скрипте содержатся команды в таком же виде, в котором их вводит пользователь в интерактивном режиме.
-                help : вывести справку по доступным командам\s
-                info : вывести в стандартный поток вывода информацию о коллекции (тип, дата инициализации, количество элементов)\s
-                print_unique_location : вывести уникальные значения поля location всех элементов в коллекции\s
-                remove_by_id id : удалить элемент из коллекции по его id\s
-                remove_greater {element} : удалить из коллекции все элементы, превышающие заданный\s
-                show : вывести в стандартный поток вывода все элементы коллекции в строковом представлении\s
-                update id {element} : обновить значение элемента коллекции, id которого равен заданному"""
+        System.out.println("add {element} : добавить новый элемент в коллекцию \n" +
+                "add_if_max {element} : добавить новый элемент в коллекцию, если его значение превышает значение наибольшего элемента этой коллекции \n" +
+                "add_if_min {element} : добавить новый элемент в коллекцию, если его значение меньше, чем у наименьшего элемента этой коллекции \n" +
+                "clear : очистить коллекцию \n" +
+                "count_greater_than_eye_color eyeColor : вывести количество элементов, значение поля eyeColor которых больше заданного \n" +
+                "filter_greater_than_location location : вывести элементы, значение поля location которых больше заданного \n" +
+                "help : вывести справку по доступным командам \n" +
+                "info : вывести в стандартный поток вывода информацию о коллекции (тип, дата инициализации, количество элементов) \n" +
+                "print_unique_location : вывести уникальные значения поля location всех элементов в коллекции \n" +
+                "remove_by_id id : удалить элемент из коллекции по его id \n" +
+                "remove_greater {element} : удалить из коллекции все элементы, превышающие заданный \n" +
+                "show : вывести в стандартный поток вывода все элементы коллекции в строковом представлении \n" +
+                "update id {element} : обновить значение элемента коллекции, id которого равен заданному"
         );
     }
-        
+
     /**
      * set collection
      *
@@ -278,19 +293,66 @@ public class PersonCollection {
 
         this.treeSet = treeSet;
     }
-    
+
     /**
      * saves collection to file XML
      *
      * @throws JAXBException
      * @throws IOException
      */
-    public void save() throws JAXBException, IOException {
+    public void save(String file) throws JAXBException, IOException {
         try {
-            Parser.convertToXML(this, filename);
+            String sc = file.trim();
+            Parser.convertToXML(this, sc);
         } catch (FileNotFoundException e) {
             System.out.println("Файл для сохранения не найден");
+        } catch (NullPointerException e){
+            System.out.println("Сохранит в текущий файл");
+            Parser.convertToXML(this,file);
         }
     }
+    /**
+     * adds a person if he is higher than the other for script
+     *
+     * @param sc
+     */
+    public boolean addIfMaxForScript(String sc) {
+        String height_s = sc.trim();
+        int height_int = Integer.parseInt(height_s);
+        boolean flag = false;
+        for (Person person1 : treeSet) {
+            flag = height_int > person1.getHeight();
+
+        }
+        if (flag) {
+            System.out.println("Самый высокий персонаж добавлен");
+            return true;
+        } else {
+            System.out.println("Персонаж не выше всех");
+            return false;
+        }
+    }
+    /**
+     * adds a person if he is lower than the other
+     *
+     * @param sc
+     */
+    public boolean addIfMinForScript(String sc) {
+        String height_s = sc.trim();
+        int height_int = Integer.parseInt(height_s);
+        boolean flag = false;
+        for (Person person1 : treeSet) {
+            flag = height_int < person1.getHeight();
+
+        }
+        if (flag) {
+            System.out.println("Самый низкий персонаж добавлен");
+            return true;
+        } else {
+            System.out.println("Персонаж не ниже всех");
+            return false;
+        }
+    }
+
 }
 

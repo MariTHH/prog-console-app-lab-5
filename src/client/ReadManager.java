@@ -8,29 +8,31 @@ import java.util.*;
  * The class is responsible for what the user enters
  */
 public class ReadManager {
+
     /**
      * method checks if the name is entered correctly, it contains only letters or not
      *
      * @param sc
      * @return name
      */
-    public static String readName(Scanner sc) {
+
+    public static String readName(Scanner sc) throws IllegalArgumentException {
         System.out.println("Введите имя персонажа ");
         String name = sc.nextLine().trim();
         while (true) {
             if (name.equals("")) {
                 System.out.println("Имя не может быть пустой строкой, введите имя");
                 name = sc.nextLine().trim();
-            } else if (!name.matches("^[a-zA-Z]*$")) {
-                 System.out.println("Имя не может быть иными знаками кроме букв");
-                 name = sc.nextLine().trim();
-             } else {
-                 return name;
-             }
+            } else if (!name.matches("^[a-zA-Z-А-Яа-я]*$")) {
+                System.out.println("Имя не может быть иными знаками кроме букв");
+                name = sc.nextLine().trim();
+            } else {
+                return name;
+            }
         }
     }
-    
-     /**
+
+    /**
      * checks if the entered coordinate is correct, whether a number is entered or not
      *
      * @param sc
@@ -52,14 +54,14 @@ public class ReadManager {
             }
         }
     }
-    
+
     /**
      * checks if the entered coordinate is correct, whether a number is entered or not
      *
      * @param sc
      * @return Y
      */
-    public static Integer readCoordinatesY(Scanner sc) {
+    public static int readCoordinatesY(Scanner sc) {
         System.out.println("Введите координату Y");
         while (true) {
             try {
@@ -75,7 +77,7 @@ public class ReadManager {
             }
         }
     }
-    
+
     /**
      * checks the correctness of the entered growth, whether the number is entered or not, check for zero
      *
@@ -83,7 +85,7 @@ public class ReadManager {
      * @return height
      */
     public static Integer readHeight(Scanner sc) {
-        System.out.println("Введите рост персонажа");
+        System.out.println("Введите рост персонажа(не больше 2 147 483 647)");
         while (true) {
             String height_string = sc.nextLine().trim();
             try {
@@ -98,7 +100,7 @@ public class ReadManager {
             }
         }
     }
-    
+
     /**
      * checks if the location name is correct, it must be less than 944 and not null
      *
@@ -108,24 +110,28 @@ public class ReadManager {
     public static String readLocationName(Scanner sc) {
         System.out.println("Введите название локации");
         String location = sc.nextLine().trim();
-        if (location.length() >= 944 || location.equals("")) {
-            while (location.length() >= 944) {
-                System.out.println("Слишком длинное название");
+        while (true) {
+            if (location.length() >= 944 || location.equals("")) {
+                while (location.length() >= 944) {
+                    System.out.println("Слишком длинное название");
+                    location = sc.nextLine().trim();
+                }
+                while (location.equals("")) {
+                    System.out.println("Название не может быть пустой строкой");
+                    location = sc.nextLine().trim();
+                }
+            } else if (!location.matches("^[a-zA-Z-А-Яа-я]*$")) {
+                System.out.println("Имя не может быть иными знаками кроме букв");
                 location = sc.nextLine().trim();
+            } else{
+                return location;
             }
-            while (location.equals("")) {
-                System.out.println("Название не может быть пустой строкой");
-                location = sc.nextLine().trim();
-            }
-        } else if (!location.matches("^[a-zA-Z]*$")) {
-            System.out.println("Имя не может быть иными знаками кроме букв");
-            location = sc.nextLine().trim();
+
         }
-        return location;
     }
 
     public static Double readLocationX(Scanner sc) {
-        System.out.println("Введите координату X для локации ");
+        System.out.println("Введите координату X для локации");
         while (true) {
             try {
                 String X_s = sc.nextLine().trim();
@@ -142,7 +148,7 @@ public class ReadManager {
     }
 
     public static Float readLocationY(Scanner sc) {
-        System.out.println("Введите координату Y для локации ");
+        System.out.println("Введите координату Y для локации");
         while (true) {
             try {
                 String Y_s = sc.nextLine().trim();
@@ -157,7 +163,7 @@ public class ReadManager {
             }
         }
     }
-    
+
     /**
      * checks the existence of the entered color
      *
@@ -174,7 +180,7 @@ public class ReadManager {
     }
 
     public static Color readColor(Scanner sc) {
-        System.out.println("Выберите любой цвет из предложенных" + Arrays.asList(Color.values()));
+        System.out.println("Выберите любой цвет из предложенных" + "GREEN(1) RED(2) BLACK(3) BLUE(4) YELLOW(5) ORANGE(6) WHITE(7)");
         while (true) {
             try {
                 String type = sc.nextLine().trim();
@@ -199,7 +205,7 @@ public class ReadManager {
             }
         }
     }
-    
+
     /**
      * checks the existence of the entered country
      *
@@ -216,7 +222,7 @@ public class ReadManager {
     }
 
     public static Country readCountry(Scanner sc) {
-        System.out.println("Выберите любую страну из предложенных" + Arrays.asList(Country.values()));
+        System.out.println("Выберите любую страну из предложенных" + "USA(1) SPAIN(2) CHINA(3) ITALY(4) JAPAN(5)");
         while (true) {
             try {
                 String type = sc.nextLine().trim();
@@ -240,5 +246,4 @@ public class ReadManager {
             }
         }
     }
-    
 }

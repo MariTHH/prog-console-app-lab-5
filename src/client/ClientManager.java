@@ -17,7 +17,7 @@ public class ClientManager {
     public static Person getNewPerson(Scanner sc) {
         String name = ReadManager.readName(sc);
         Long X = ReadManager.readCoordinatesX(sc);
-        Integer Y = ReadManager.readCoordinatesY(sc);
+        int Y = ReadManager.readCoordinatesY(sc);
         Double X2 = ReadManager.readLocationX(sc);
         Float Y2 = ReadManager.readLocationY(sc);
         String location = ReadManager.readLocationName(sc);
@@ -29,12 +29,12 @@ public class ClientManager {
 
         return new Person(name, new Coordinates(X, Y), height, eyeColor, hairColor, nationality, new Location(X2, Y2, location));
     }
-    
+
     /**
      * creates a person whose data is recorded in the script
      *
      * @param data
-     * @return person
+     * @return
      */
     public static Person createPersonFromScript(ArrayList<String> data) {
         try {
@@ -53,5 +53,6 @@ public class ClientManager {
             return null;
         }
     }
-    
+
 }
+

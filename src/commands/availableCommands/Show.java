@@ -18,7 +18,7 @@ public class Show extends Command {
         if (args.length > 1) {
             System.out.println("Вы неправильно ввели команду");
         } else {
-            personCollection.show();
+            personCollection.information();
         }
     }
 
